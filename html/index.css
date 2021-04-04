@@ -1,0 +1,107 @@
+body {
+	font-weight: normal;
+	font-family: Arial;
+	font-size: 1.5vmin;
+	font-weight: 800;
+	
+	color: white;
+
+	text-shadow:
+		1px 1px 0px rgba(0, 0, 0, 0.8),
+		-1px 1px 0px rgba(0, 0, 0, 0.8),
+		1px -1px 0px rgba(0, 0, 0, 0.8),
+		-1px -1px 0px rgba(0, 0, 0, 0.8)
+	;
+
+	user-select: none;
+	text-align: left;
+}
+
+input {
+	background: rgba(0, 0, 0, 0.4);
+	color: white;
+	border: none;
+	outline: none;
+	user-select: all;
+}
+
+button {
+	background: rgba(255, 255, 255, 0.8);
+	padding: 0.5vmin;
+	color: black;
+	border: none;
+	outline: none;
+	font-weight: 700;
+	border-radius: 4px;
+	margin-top: 1vmin;
+	margin-bottom: 1vmin;
+}
+
+button:active {
+	background: rgba(128, 192, 255, 0.8);
+}
+
+#clipboard {
+	position: absolute;
+	color: transparent;
+	background: transparent;
+	border: transparent;
+	outline: transparent;
+	pointer-events: none;
+	resize: none;
+}
+
+#content {
+	display: block;
+	position: absolute;
+	left: 50vw;
+	top: 6vmin;
+	padding: 0px;
+	margin: 0px;
+	tab-size: 0px;
+	max-height: 80vh;
+	transform: translate(-50%, 0%);
+}
+
+#handling-fields {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 50vw;
+	max-height: 50vh;
+}
+
+#handling-fields div {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 2vmin;
+}
+
+.tooltip .tooltip-text {
+	visibility: hidden;
+	width: 50vw;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+	text-align: left;
+	padding: 1vmin 1vmin;
+	border-radius: 1vmin;
+
+	position: absolute;
+	z-index: 1;
+	top: 110%;
+	left: 50%;
+
+	opacity: 0;
+	transform: translate(-50%, 0%);
+}
+
+.tooltip .tooltip-text::after {
+	content: "";
+	position: absolute;
+}
+
+.tooltip:hover .tooltip-text {
+	visibility: visible;
+	opacity: 1;
+} 
