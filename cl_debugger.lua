@@ -1,3 +1,5 @@
+local isInsideVehicle = false
+
 Debugger = {
 	speedBuffer = {},
 	speed = 0.0,
@@ -48,12 +50,23 @@ end
 
 function Debugger:UpdateVehicle()
 	local ped = PlayerPedId()
-	local vehicle = GetVehiclePedIsIn(ped, false) or 0
 
-	if self.vehicle ~= vehicle then
-		if DoesEntityExist(vehicle) then
+	if IsPedInAnyVehicle(ped, false) then
+		local vehicle = GetVehiclePedIsIn(ped, false)
+
+		if self.vehicle ~= vehicle then
 			self:Set(vehicle)
-		else
+		end
+
+		if not isInsideVehicle then
+			isInsideVehicle = true
+		end
+	else
+		if isInsideVehicle then
+			isInsideVehicle = false
+		end
+
+		if self.vehicle then
 			self.vehicle = nil
 		end
 	end
@@ -204,9 +217,16 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
-		Debugger:UpdateInput()
-		Debugger:UpdateAverages()
+		local sleep = 500
+
+		if isInsideVehicle then
+			sleep = 0
+
+			Debugger:UpdateInput()
+			Debugger:UpdateAverages()
+		end
+
+		Citizen.Wait(sleep)
 	end
 end)
 
