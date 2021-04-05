@@ -166,7 +166,7 @@ function Debugger:CopyHandling()
 		-- Append text.
 		if tonumber(value) ~= nil then
 			writeLine(("<%s value=\"%s\" />"):format(field.name, value))
-		elseif field.type == "vector3" then
+		elseif field.type == "vector" then
 			writeLine(("<%s x=\"%s\" y=\"%s\" z=\"%s\" />"):format(field.name, value.x, value.y, value.z))
 		end
 	end
