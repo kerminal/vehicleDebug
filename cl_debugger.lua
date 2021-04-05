@@ -231,15 +231,18 @@ Citizen.CreateThread(function()
 end)
 
 --[[ NUI Events ]]--
-RegisterNUICallback("updateHandling", function(data)
+RegisterNUICallback("updateHandling", function(data, cb)
+	cb(true)
 	Debugger:SetHandling(tonumber(data.key), data.value)
 end)
 
-RegisterNUICallback("copyHandling", function(data)
+RegisterNUICallback("copyHandling", function(data, cb)
+	cb(true)
 	Debugger:CopyHandling()
 end)
 
-RegisterNUICallback("resetStats", function(data)
+RegisterNUICallback("resetStats", function(data, cb)
+	cb(true)
 	Debugger:ResetStats()
 end)
 
