@@ -2,7 +2,7 @@ author 'Jameslroll'
 description 'Utility to edit the handling of vehicles and record speeds'
 version '1.0.0'
 
-fx_version 'adamant'
+fx_version 'cerulean'
 game 'gta5'
 
 ui_page 'html/index.html'
