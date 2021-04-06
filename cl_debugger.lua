@@ -48,13 +48,15 @@ end
 
 function Debugger:UpdateVehicle()
 	local ped = PlayerPedId()
-	local vehicle = GetVehiclePedIsIn(ped, false) or 0
+	local isInVehicle = IsPedInAnyVehicle(ped, false)
+	local vehicle = isInVehicle and GetVehiclePedIsIn(ped, false)
 
-	if self.vehicle ~= vehicle then
-		if DoesEntityExist(vehicle) then
+	if self.isInVehicle ~= isInVehicle or self.vehicle ~= vehicle then
+		self.vehicle = vehicle
+		self.isInVehicle = isInVehicle
+
+		if isInVehicle and DoesEntityExist(vehicle) then
 			self:Set(vehicle)
-		else
-			self.vehicle = nil
 		end
 	end
 end
@@ -204,22 +206,29 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(0)
-		Debugger:UpdateInput()
-		Debugger:UpdateAverages()
+		if Debugger.isInVehicle then
+			Citizen.Wait(0)
+			Debugger:UpdateInput()
+			Debugger:UpdateAverages()
+		else
+			Citizen.Wait(500)
+		end
 	end
 end)
 
 --[[ NUI Events ]]--
-RegisterNUICallback("updateHandling", function(data)
+RegisterNUICallback("updateHandling", function(data, cb)
+	cb(true)
 	Debugger:SetHandling(tonumber(data.key), data.value)
 end)
 
-RegisterNUICallback("copyHandling", function(data)
+RegisterNUICallback("copyHandling", function(data, cb)
+	cb(true)
 	Debugger:CopyHandling()
 end)
 
-RegisterNUICallback("resetStats", function(data)
+RegisterNUICallback("resetStats", function(data, cb)
+	cb(true)
 	Debugger:ResetStats()
 end)
 
