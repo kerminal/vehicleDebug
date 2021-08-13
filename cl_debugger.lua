@@ -6,6 +6,12 @@ Debugger = {
 }
 
 --[[ Functions ]]--
+function TruncateNumber(value)
+	value = value * Config.Precision
+
+	return (value % 1.0 > 0.5 and math.ceil(value) or math.floor(value)) / Config.Precision
+end
+
 function Debugger:Set(vehicle)
 	self.vehicle = vehicle
 	self:ResetStats()
@@ -22,6 +28,8 @@ function Debugger:Set(vehicle)
 		local value = fieldType.getter(vehicle, "CHandlingData", field.name)
 		if type(value) == "vector3" then
 			value = ("%s,%s,%s"):format(value.x, value.y, value.z)
+		elseif field.type == "float" then
+			value = TruncateNumber(value)
 		end
 
 		-- Get input.
@@ -164,10 +172,11 @@ function Debugger:CopyHandling()
 
 		-- Get value.
 		local value = fieldType.getter(vehicle, "CHandlingData", field.name, true)
+		local nValue = tonumber(value)
 
 		-- Append text.
-		if tonumber(value) ~= nil then
-			writeLine(("<%s value=\"%s\" />"):format(field.name, value))
+		if nValue ~= nil then
+			writeLine(("<%s value=\"%s\" />"):format(field.name, field.type == "float" and TruncateNumber(nValue) or nValue))
 		elseif field.type == "vector" then
 			writeLine(("<%s x=\"%s\" y=\"%s\" z=\"%s\" />"):format(field.name, value.x, value.y, value.z))
 		end

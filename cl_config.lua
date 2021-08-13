@@ -1,4 +1,5 @@
 Config = {
+	Precision = 10000.0,
 	Fields = {
 		{ name = "fMass", type = "float", description = [[
 			The weight of the vehicle. Values should be given in Kilograms.
