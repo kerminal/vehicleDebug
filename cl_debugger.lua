@@ -3,9 +3,8 @@ Debugger = {
 	speed = 0.0,
 	accel = 0.0,
 	decel = 0.0,
+	toggle = false
 }
-
-local toggle = false
 
 --[[ Functions ]]--
 function TruncateNumber(value)
@@ -252,13 +251,13 @@ end)
 
 --[[ Commands ]]--
 RegisterCommand("+vehicleDebug", function()
-	if toggle == false then return end
+	if Debugger.toggleOn == false then return end
 	Debugger:Focus(not Debugger.hasFocus)
 end, true)
 
 RegisterKeyMapping("+vehicleDebug", "Vehicle Debugger", "keyboard", "lmenu")
 
 RegisterCommand("vehdebug", function()
-	Debugger:ToggleOn(not toggle)
-	toggle = not toggle
+	Debugger:ToggleOn(not Debugger.toggleOn)
+	Debugger.toggleOn = not Debugger.toggleOn
 end, true)
