@@ -5,6 +5,8 @@ Debugger = {
 	decel = 0.0,
 }
 
+local toggle = false
+
 --[[ Functions ]]--
 function TruncateNumber(value)
 	value = value * Config.Precision
@@ -15,7 +17,7 @@ end
 function Debugger:Set(vehicle)
 	self.vehicle = vehicle
 	self:ResetStats()
-	
+
 	local handlingText = ""
 
 	-- Loop fields.
@@ -41,9 +43,9 @@ function Debugger:Set(vehicle)
 			>
 			</input>
 		]]):format(key, value)
-		
+
 		-- Append text.
-		handlingText = handlingText..([[
+		handlingText = handlingText .. ([[
 			<div class='tooltip'><span class='tooltip-text'>%s</span><span>%s</span>%s</div>
 		]]):format(field.description or "Unspecified.", field.name, input)
 	end
@@ -81,7 +83,7 @@ function Debugger:UpdateAverages()
 
 	-- Get the speed.
 	local speed = GetEntitySpeed(self.vehicle)
-	
+
 	-- Speed buffer.
 	table.insert(self.speedBuffer, speed)
 
@@ -155,9 +157,9 @@ function Debugger:CopyHandling()
 	-- Line writer.
 	local function writeLine(append)
 		if text ~= "" then
-			text = text.."\n\t\t\t"
+			text = text .. "\n\t\t\t"
 		end
-		text = text..append
+		text = text .. append
 	end
 
 	-- Get vehicle.
@@ -191,9 +193,16 @@ function Debugger:Focus(toggle)
 
 	SetNuiFocus(toggle, toggle)
 	SetNuiFocusKeepInput(toggle)
-	
+
 	self.hasFocus = toggle
 	self:Invoke("setFocus", toggle)
+end
+
+function Debugger:ToggleOn(toggleData)
+	-- if toggle and not DoesEntityExist(self.vehicle or 0) then return end
+
+	self.toggle = toggleData
+	self:Invoke("toggle", toggleData)
 end
 
 function Debugger:Invoke(_type, data)
@@ -243,7 +252,13 @@ end)
 
 --[[ Commands ]]--
 RegisterCommand("+vehicleDebug", function()
+	if toggle == false then return end
 	Debugger:Focus(not Debugger.hasFocus)
 end, true)
 
 RegisterKeyMapping("+vehicleDebug", "Vehicle Debugger", "keyboard", "lmenu")
+
+RegisterCommand("vehdebug", function()
+	Debugger:ToggleOn(not toggle)
+	toggle = not toggle
+end, true)
