@@ -44,7 +44,7 @@ function Debugger:Set(vehicle)
 		]]):format(key, value)
 
 		-- Append text.
-		handlingText = handlingText .. ([[
+		handlingText = handlingText..([[
 			<div class='tooltip'><span class='tooltip-text'>%s</span><span>%s</span>%s</div>
 		]]):format(field.description or "Unspecified.", field.name, input)
 	end
@@ -156,9 +156,9 @@ function Debugger:CopyHandling()
 	-- Line writer.
 	local function writeLine(append)
 		if text ~= "" then
-			text = text .. "\n\t\t\t"
+			text = text.."\n\t\t\t"
 		end
-		text = text .. append
+		text = text..append
 	end
 
 	-- Get vehicle.
