@@ -3,15 +3,14 @@ body {
 	font-family: Arial;
 	font-size: 1.5vmin;
 	font-weight: 800;
-	
+
 	color: white;
 
 	text-shadow:
 		1px 1px 0px rgba(0, 0, 0, 0.8),
 		-1px 1px 0px rgba(0, 0, 0, 0.8),
 		1px -1px 0px rgba(0, 0, 0, 0.8),
-		-1px -1px 0px rgba(0, 0, 0, 0.8)
-	;
+		-1px -1px 0px rgba(0, 0, 0, 0.8);
 
 	user-select: none;
 	text-align: left;
@@ -52,7 +51,7 @@ button:active {
 }
 
 #content {
-	display: block;
+	display: none;
 	position: absolute;
 	left: 50vw;
 	top: 6vmin;
@@ -104,4 +103,4 @@ button:active {
 .tooltip:hover .tooltip-text {
 	visibility: visible;
 	opacity: 1;
-} 
+}
