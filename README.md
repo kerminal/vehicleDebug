@@ -8,6 +8,8 @@ This is a utility for FiveM that allows the live editing of vehicle handling and
 - Ensure `vehicleDebug` in the server.cfg, or `ensure vehicleDebug` in <kbd>F8</kbd>.
 - Use the **BETA** branch of FiveM. (Change this in the FiveM launcher.)
 - Open <kbd>F8</kbd> and run the command `vehdebug` to toggle the UI on.
+- If the UI does not open after running the command, ensure your account has the correct ACE perms:
+  - `group.admin` or `command.vehdebug allow`
 - Press <kbd>LALT</kbd> to open the handling editor.
 - Enjoy!
 
