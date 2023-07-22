@@ -1,8 +1,17 @@
 ## Description
 This is a utility for FiveM that allows the live editing of vehicle handling and some basic performance statistic tracking for top speed, acceleration, and deceleration.
 
-## Installation
-Just start the resource `vehicleDebug` and you're set!
+## Installation and Use
+- Download the GitHub repository code.
+- Rename the folder to `vehicleDebug`
+- Add to the `resources` folder.
+- Ensure `vehicleDebug` in the server.cfg, or `ensure vehicleDebug` in <kbd>F8</kbd>.
+- Use the **BETA** branch of FiveM. (Change this in the FiveM launcher.)
+- Open <kbd>F8</kbd> and run the command `vehdebug` to toggle the UI on.
+- If the UI does not open after running the command, ensure your account has the correct ACE perms:
+  - `group.admin` or `command.vehdebug allow`
+- Press <kbd>LALT</kbd> to open the handling editor.
+- Enjoy!
 
 ## Editor
 Press Left Alt while in a vehicle to bring up the menu, or change the key under the FiveM keybind settings. Click the input boxes for whichever value you would like to modify, and change it. That's it! The handling will immediately update as you type. Hover over the fields for a little more information on what that particular field does.
