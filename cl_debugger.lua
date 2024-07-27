@@ -251,7 +251,7 @@ end)
 
 --[[ Commands ]]--
 RegisterCommand("+vehicleDebug", function()
-	if Debugger.toggleOn == false then return end
+	if not Debugger.toggleOn then return end
 	Debugger:Focus(not Debugger.hasFocus)
 end, true)
 
